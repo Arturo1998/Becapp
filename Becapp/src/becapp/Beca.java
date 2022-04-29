@@ -20,8 +20,8 @@ public class Beca {
   return null;
   }
 
-  public String buscarBeca(String nombre) {
-  return null;
+  public int buscarBeca(String nombre) {
+  return 1;
   }
 
   public String solicitarContacto() {

@@ -2,7 +2,7 @@ package becapp;
 
 public class Beca {
 
-  private String cod;
+  private int cod;
 
   private String nombre;
 
@@ -21,6 +21,10 @@ public class Beca {
   }
 
   public String buscarBeca(String nombre) {
+  return null;
+  }
+
+  public String buscarBeca(int cod) {
   return null;
   }
 

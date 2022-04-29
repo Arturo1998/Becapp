@@ -25,7 +25,7 @@ public class Beca {
   }
 
   public String solicitarContacto() {
-  return null;
+  return "contacto";
   }
 
 }

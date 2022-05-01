@@ -12,18 +12,7 @@ public class Administrador extends Usuario {
 
   private Date fecha_inc;
 
- 
-
-  private void borrarBeca() {
-  }
-
-  private void modificarBeca() {
-  }
-
-  public void comprobarBeca() {
-  }
-
-  public void darAltaAdmin(String dni) {
+   public void darAltaAdmin(String dni) {
   }
 
   public void darBajaAdmin(String dni) {

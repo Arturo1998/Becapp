@@ -2,7 +2,7 @@ package becapp;
 
 public class Beca {
 
-  private String cod;
+  private int cod;
 
   private String nombre;
 
@@ -41,5 +41,30 @@ public String mostrarBeca() {
   public String solicitarContacto() {
   return "contacto";
   }
+
+public String getNombre() {
+	return nombre;
+}
+
+public String getCondiciones() {
+	return condiciones;
+}
+
+public String getDescripcion() {
+	return descripcion;
+}
+
+public String getContacto() {
+	return contacto;
+}
+
+public String getNombreProveedor() {
+	return nombreProveedor;
+}
+
+public tipo_beca getTipo_beca() {
+	return tipo_beca;
+}
+  
 
 }

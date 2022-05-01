@@ -253,23 +253,40 @@ public class conexion_BBDD {
 	 * @author Eduardo
 	 */
 
+	/**
+	 * En este metodo recibimos los datos correspondiente a la beca que queremos dar
+	 * de alta, a excepción del numero de beca, que conseguimos en la primera parte
+	 * del metodo de la tabla beca.cod y le sumamos +1 para que siga el orden
+	 * correlativo. En la segunda parte del metodo hacemos un insert con todo los
+	 * datos recopilados con el metodo consulta preparada.
+	 * 
+	 * @param nombre          datos beca
+	 * @param condiciones     datos beca
+	 * @param descripcion     datos beca
+	 * @param contacto        datos beca
+	 * @param nombreProveedor datos beca
+	 * @param tipo_beca       datos beca
+	 * @return true en caso de exito, false en caso contrario
+	 */
 	private boolean aniadirBeca(String nombre, String condiciones, String descripcion, String contacto,
 			String nombreProveedor, becapp.tipo_beca tipo_beca) {
 
 		boolean alta = false;
+		// convertimos el enum a String
 		String tBeca = tipo_beca.toString();
-
 		int cod;
 
-		Beca beca = new Beca(nombre, condiciones, descripcion, contacto, nombreProveedor, tipo_beca);
+		// En proceos de evaluacion
+		// Beca beca = new Beca(nombre, condiciones, descripcion, contacto,
+		// nombreProveedor, tipo_beca);
 
 		PreparedStatement ps;
 		try {
-			ps = connection.prepareStatement("select max(cod)from beca");
+			ps = connection.prepareStatement("select max(cod)from becas");
 			rs = ps.executeQuery();
 			cod = rs.getInt(1) + 1;
 
-			ps = connection.prepareStatement("insert into beca values(?,?,?,?,?,?,?)");
+			ps = connection.prepareStatement("insert into becas values(?,?,?,?,?,?,?)");
 			ps.setInt(1, cod);
 			ps.setString(2, nombre);
 			ps.setString(3, condiciones);
@@ -278,8 +295,8 @@ public class conexion_BBDD {
 			ps.setString(6, nombreProveedor);
 			ps.setString(7, tBeca);
 			ps.executeUpdate();
-			
-			alta=true;
+
+			alta = true;
 
 		} catch (SQLException e) {
 			System.out.println("no se encuantan los datos en la base de datos");
@@ -288,6 +305,33 @@ public class conexion_BBDD {
 		}
 
 		return alta;
+	}
+	
+	/**
+	 * Este metodo a partir del codigo de beca recibido, borrara la beca correspondiente.
+	 * 
+	 * @param cod numero de beca referencia para el borrado
+	 * @return true en caso de exito, false en caso contrario
+	 */
+	private boolean borrarBeca(int cod) {
+
+		boolean borrado = false;
+		
+		PreparedStatement ps;
+		
+		try {
+			ps = connection.prepareStatement("delete from becas where cod="+cod);
+			rs = ps.executeQuery();
+
+			borrado = true;
+
+		} catch (SQLException e) {
+			System.out.println("No se a podido realizar el borrado de la beca");
+			borrado = false;
+			return borrado;
+		}
+		
+		return borrado;
 	}
 
 }

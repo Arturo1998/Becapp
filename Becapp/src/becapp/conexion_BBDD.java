@@ -242,7 +242,7 @@ public class conexion_BBDD {
 		return alta;
 
 	}
-	
+
 	/**
 	 * Metodo que borra un admin de la tabla admin a partir de una id de usuario
 	 * 
@@ -269,6 +269,38 @@ public class conexion_BBDD {
 		}
 
 		return borrado;
+	}
+	
+	/**
+	 * Metodo que devuelve una lista completa de todo los administradores que tenemos en la tabla administradores
+	 * 
+	 * @return variable String con toda la informacion
+	 */
+
+	public String mostrarAdmin() {
+
+		PreparedStatement ps;
+		String lista = "";
+
+		try {
+			ps = connection.prepareStatement("select * from administradores");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+
+				lista += "Codigo administrador " + rs.getInt(1) + " dni = " + rs.getString(2) + " nombre= "
+						+ rs.getString(3) + " apellido= " + rs.getString(4) + " nacionalidad= " + rs.getString(5)
+						+ " email= " + rs.getString(6) + " telfono= " + rs.getInt(7) + " fecha nacimiento= "
+						+ rs.getString(8) + " clave= " + rs.getString(9) + " estado= " + rs.getBoolean(10)
+						+ " Descripcion puesto= " + rs.getString(11) + " fecha inicio= " + rs.getDate(12) + "\n";
+
+			}
+
+		} catch (SQLException e) {
+
+			return "La lista no se ha podido cargar";
+		}
+
+		return lista;
 	}
 
 }

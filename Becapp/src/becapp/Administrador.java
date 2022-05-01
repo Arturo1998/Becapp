@@ -19,10 +19,6 @@ public class Administrador extends Usuario {
 		this.descripcion_puesto = descripcion_puesto;
 	}
 
-	public String mostrarAdmin() {
-		return null;
-	}
-
 	public String getClave() {
 		return clave;
 	}

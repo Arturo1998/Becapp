@@ -124,8 +124,8 @@ public class conexion_BBDD {
 		 */
 
 	}
-	
-	//EJERCICIO5
+
+	// EJERCICIO5
 
 	public void ejercutarInsert_ConsultaPreparadaEj5(String consulta) throws SQLException {
 
@@ -152,10 +152,10 @@ public class conexion_BBDD {
 		ps.close();
 
 	}
+
 	public void ejercutarDelete_ConsultaPreparadaEj5(String consulta) throws SQLException {
-		
-		
-				// consulta: "insert into tabla1 values(?)"
+
+		// consulta: "insert into tabla1 values(?)"
 		PreparedStatement ps = connection.prepareStatement(consulta);
 		rs = ps.executeQuery();
 		if (rs != null) {
@@ -174,14 +174,15 @@ public class conexion_BBDD {
 		ps.close();
 
 	}
+
 	public void ejercutarUpdate_ConsultaPreparadaEj6(String consulta) throws SQLException {
-		
+
 		PreparedStatement ps = connection.prepareStatement(consulta);
 		rs = ps.executeQuery();
 		if (rs != null) {
 			System.out.println("Cliente Actualizado");
 		}
-		
+
 		ps = connection.prepareStatement("select * from clientes_taller");
 		rs = ps.executeQuery();
 
@@ -193,72 +194,100 @@ public class conexion_BBDD {
 		}
 
 		ps.close();
-		
-		
-		
+
 	}
-	
-	public void consultaNumerosPrimos(String consulta,int numero) throws SQLException{
-		
-		
+
+	public void consultaNumerosPrimos(String consulta, int numero) throws SQLException {
+
 		PreparedStatement ps = connection.prepareStatement(consulta);
 		ps.setInt(1, numero);
 		ps.executeUpdate();
-		
-		
-	
-		
+
 	}
-	
-	public int consultaPrimos(int inicio,int fin) throws SQLException{
-		
-		int vuelta=0;
-		PreparedStatement ps=connection.prepareStatement("select count(*) from numeros_primos where numeros>="+inicio+" and numeros<="+fin);
-		rs=ps.executeQuery();
-		
+
+	public int consultaPrimos(int inicio, int fin) throws SQLException {
+
+		int vuelta = 0;
+		PreparedStatement ps = connection.prepareStatement(
+				"select count(*) from numeros_primos where numeros>=" + inicio + " and numeros<=" + fin);
+		rs = ps.executeQuery();
+
 		while (rs.next()) {
-		vuelta=rs.getInt(1);
+			vuelta = rs.getInt(1);
 		}
-		
+
 		ps.close();
 		return vuelta;
-		
-		
+
 	}
-	public void numeroPrimoAlto() throws SQLException{
-		
-		PreparedStatement ps=connection.prepareStatement("select max(numeros) from numeros_primos");
-		rs=ps.executeQuery();
-		
+
+	public void numeroPrimoAlto() throws SQLException {
+
+		PreparedStatement ps = connection.prepareStatement("select max(numeros) from numeros_primos");
+		rs = ps.executeQuery();
+
 		while (rs.next()) {
-		System.out.println(rs.getInt(1));
+			System.out.println(rs.getInt(1));
 		}
-		
+
 		ps.close();
 	}
-	
-	public void mediaPrimos() throws SQLException{
-		
-		PreparedStatement ps=connection.prepareStatement("select numeros from numeros_primos");
-		rs=ps.executeQuery();
-		
-		int media=0;
-		
+
+	public void mediaPrimos() throws SQLException {
+
+		PreparedStatement ps = connection.prepareStatement("select numeros from numeros_primos");
+		rs = ps.executeQuery();
+
+		int media = 0;
+
 		while (rs.next()) {
-		media+=rs.getInt(1);
+			media += rs.getInt(1);
 		}
-		
-		System.out.println("La meida de los mil primero numeros primos es: " +media/consultaPrimos(0, 1000));
-		
+
+		System.out.println("La meida de los mil primero numeros primos es: " + media / consultaPrimos(0, 1000));
+
 		ps.close();
 	}
-	
+
 	/**
 	 * @author Eduardo
 	 */
-	
-	
-	
-	
+
+	private boolean aniadirBeca(String nombre, String condiciones, String descripcion, String contacto,
+			String nombreProveedor, becapp.tipo_beca tipo_beca) {
+
+		boolean alta = false;
+		String tBeca = tipo_beca.toString();
+
+		int cod;
+
+		Beca beca = new Beca(nombre, condiciones, descripcion, contacto, nombreProveedor, tipo_beca);
+
+		PreparedStatement ps;
+		try {
+			ps = connection.prepareStatement("select max(cod)from beca");
+			rs = ps.executeQuery();
+			cod = rs.getInt(1) + 1;
+
+			ps = connection.prepareStatement("insert into beca values(?,?,?,?,?,?,?)");
+			ps.setInt(1, cod);
+			ps.setString(2, nombre);
+			ps.setString(3, condiciones);
+			ps.setString(4, descripcion);
+			ps.setString(5, contacto);
+			ps.setString(6, nombreProveedor);
+			ps.setString(7, tBeca);
+			ps.executeUpdate();
+			
+			alta=true;
+
+		} catch (SQLException e) {
+			System.out.println("no se encuantan los datos en la base de datos");
+			alta = false;
+			return alta;
+		}
+
+		return alta;
+	}
 
 }

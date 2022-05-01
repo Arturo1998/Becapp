@@ -12,8 +12,7 @@ public class Administrador extends Usuario {
 
   private Date fecha_inc;
 
-  private void aniadirBeca() {
-  }
+ 
 
   private void borrarBeca() {
   }

@@ -165,9 +165,11 @@ public class conexion_BBDD {
 	}
 
 	/**
-	 * Este metodo nos saca de la base de datos toda la informacion relativa a nuestras becas
+	 * Este metodo nos saca de la base de datos toda la informacion relativa a
+	 * nuestras becas
 	 * 
-	 * @return devuelve un string con la informacion solicita o un mensaje de error en caso de fallo
+	 * @return devuelve un string con la informacion solicita o un mensaje de error
+	 *         en caso de fallo
 	 */
 	public String listarBecas() {
 
@@ -191,6 +193,54 @@ public class conexion_BBDD {
 		}
 
 		return lista;
+	}
+
+	/**
+	 * Con este metodos daremos de alta administradores en la tabla de
+	 * administradores, a partir de un objeto administrador que herreda de usuario
+	 * 	  
+	 * @param a Objeto de la calse administrador con todos los datos
+	 * @return true en caso de exito, false en caso contrario
+	 */
+
+	public boolean darAltaAdmin(Administrador a) {
+
+		boolean alta = false;
+		int cod;
+
+		PreparedStatement ps;
+		try {
+			ps = connection.prepareStatement("select max(id_usuario)from administradores");
+			rs = ps.executeQuery();
+			// variar en un futuro para poder hacer la incorpoacion en una tabla vacia
+			cod = rs.getInt(1) + 1;
+
+			ps = connection.prepareStatement("insert into becas values(?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps.setInt(1, a.getId_usuario());
+			ps.setString(2, a.getDni());
+			ps.setString(3, a.getNombre());
+			ps.setString(4, a.getApellido());
+			ps.setString(5, a.getNacionalidad());
+			ps.setString(6, a.getEmail());
+			ps.setInt(7, a.getTelf());
+			//pendiente de ver al interaccion de este dato
+			ps.setDate(8, (Date) a.getFecha_nac());
+			ps.setString(9, a.getClave());
+			ps.setBoolean(10, a.isEstado());
+			ps.setString(11, a.getDescripcion_puesto());
+			ps.setString(12, "sysdate");
+			ps.executeUpdate();
+
+			alta = true;
+
+		} catch (SQLException e) {
+			System.out.println("no se encuantan los datos en la base de datos");
+			alta = false;
+			return alta;
+		}
+
+		return alta;
+
 	}
 
 }

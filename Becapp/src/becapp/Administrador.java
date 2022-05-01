@@ -4,22 +4,42 @@ import java.util.Date;
 
 public class Administrador extends Usuario {
 
-  private String clave;
+	private String clave;
 
-  private boolean estado;
+	private boolean estado;
 
-  private String descripcion_puesto;
+	private String descripcion_puesto;
 
-  private Date fecha_inc;
+	private Date fecha_inc;
 
-   public void darAltaAdmin(String dni) {
-  }
+	public Administrador(String clave, boolean estado, String descripcion_puesto) {
+		super();
+		this.clave = clave;
+		this.estado = estado;
+		this.descripcion_puesto = descripcion_puesto;
+	}
 
-  public void darBajaAdmin(String dni) {
-  }
+	public void darBajaAdmin(String dni) {
+	}
 
-  public String mostrarAdmin() {
-  return null;
-  }
+	public String mostrarAdmin() {
+		return null;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public String getDescripcion_puesto() {
+		return descripcion_puesto;
+	}
+
+	public Date getFecha_inc() {
+		return fecha_inc;
+	}
 
 }

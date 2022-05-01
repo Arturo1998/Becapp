@@ -2,7 +2,7 @@ package becapp;
 
 public class Beca {
 
-  private String cod;
+  private int cod;
 
   private String nombre;
 
@@ -14,7 +14,7 @@ public class Beca {
 
   private String nombreProveedor;
 
-      public tipo_beca tipo_beca;
+  public tipo_beca tipo_beca;
 
   public String mostrarBeca() {
   return null;

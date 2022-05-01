@@ -19,9 +19,6 @@ public class Administrador extends Usuario {
 		this.descripcion_puesto = descripcion_puesto;
 	}
 
-	public void darBajaAdmin(String dni) {
-	}
-
 	public String mostrarAdmin() {
 		return null;
 	}

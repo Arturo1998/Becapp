@@ -198,7 +198,7 @@ public class conexion_BBDD {
 	/**
 	 * Con este metodos daremos de alta administradores en la tabla de
 	 * administradores, a partir de un objeto administrador que herreda de usuario
-	 * 	  
+	 * 
 	 * @param a Objeto de la calse administrador con todos los datos
 	 * @return true en caso de exito, false en caso contrario
 	 */
@@ -223,7 +223,7 @@ public class conexion_BBDD {
 			ps.setString(5, a.getNacionalidad());
 			ps.setString(6, a.getEmail());
 			ps.setInt(7, a.getTelf());
-			//pendiente de ver al interaccion de este dato
+			// pendiente de ver al interaccion de este dato
 			ps.setDate(8, (Date) a.getFecha_nac());
 			ps.setString(9, a.getClave());
 			ps.setBoolean(10, a.isEstado());
@@ -234,13 +234,41 @@ public class conexion_BBDD {
 			alta = true;
 
 		} catch (SQLException e) {
-			System.out.println("no se encuantan los datos en la base de datos");
+			System.out.println("no se insertar los datos");
 			alta = false;
 			return alta;
 		}
 
 		return alta;
 
+	}
+	
+	/**
+	 * Metodo que borra un admin de la tabla admin a partir de una id de usuario
+	 * 
+	 * @param id_usuario dato que filtra el borrado del administrador
+	 * @return true en caso de exito, false en caso contrario
+	 */
+
+	public boolean darBajaAdmin(int id_usuario) {
+
+		boolean borrado = false;
+
+		PreparedStatement ps;
+
+		try {
+			ps = connection.prepareStatement("delete from administradores where id_usuario=" + id_usuario);
+			rs = ps.executeQuery();
+
+			borrado = true;
+
+		} catch (SQLException e) {
+			System.out.println("No se a podido realizar el borrado del administrador");
+			borrado = false;
+			return borrado;
+		}
+
+		return borrado;
 	}
 
 }

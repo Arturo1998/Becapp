@@ -333,5 +333,34 @@ public class conexion_BBDD {
 		
 		return borrado;
 	}
+	
+	/**
+	 * Con este metodo podremos actualizar determinados datos de las distintaas becas de nuestra BBDD 
+	 * 	
+	 * @param columna campo del que queremos hacer la actualizacion
+	 * @param cod codigo del cliente al que se le hace el cambio
+	 * @param actualizacion dato que se cambia en la columna
+	 * @return true en caso de exito, false en caso contrario
+	 */
+	  private boolean modificarBeca(String columna, int cod, String actualizacion) {
+		  
+			boolean modificado = false;
+			
+			PreparedStatement ps;
+			
+			try {
+				ps = connection.prepareStatement("update becas set "+columna+" = "+actualizacion+" where ncliente="+cod);
+				rs = ps.executeQuery();
+
+				modificado = true;
+
+			} catch (SQLException e) {
+				System.out.println("No se a podido realizar la actualizacion de la beca");
+				modificado = false;
+				return modificado;
+			}
+			
+			return modificado;
+	  }
 
 }

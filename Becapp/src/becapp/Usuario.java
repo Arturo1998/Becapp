@@ -8,9 +8,9 @@ public class Usuario {
 
 	private String dni;
 
-	private String apellido;
-
 	private String nombre;
+		
+	private String apellido;
 
 	private String nacionalidad;
 
@@ -19,6 +19,21 @@ public class Usuario {
 	private int telf;
 
 	private Date fecha_nac;
+	
+	
+
+	public Usuario(int id_usuario, String dni, String nombre, String apellido, String nacionalidad, String email,
+			int telf, Date fecha_nac) {
+		super();
+		this.id_usuario = id_usuario;
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.nacionalidad = nacionalidad;
+		this.email = email;
+		this.telf = telf;
+		this.fecha_nac = fecha_nac;
+	}
 
 	public String getDni() {
 		return dni;

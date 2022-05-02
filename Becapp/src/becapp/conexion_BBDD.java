@@ -53,10 +53,10 @@ public class conexion_BBDD {
 
 	/**
 	 * En este metodo recibimos los datos correspondiente a la beca que queremos dar
-	 * de alta, a excepción del numero de beca, que conseguimos en la primera parte
-	 * del metodo de la tabla beca.cod y le sumamos +1 para que siga el orden
-	 * correlativo. En la segunda parte del metodo hacemos un insert con todo los
-	 * datos recopilados con el metodo consulta preparada.
+	 * de alta en un objeto beca, a excepción del numero de beca, que conseguimos en
+	 * la primera parte del metodo de la tabla beca.cod y le sumamos +1 para que
+	 * siga el orden correlativo. En la segunda parte del metodo hacemos un insert
+	 * con todo los datos recopilados con el metodo consulta preparada.
 	 * 
 	 * @param nombre          datos beca
 	 * @param condiciones     datos beca
@@ -66,12 +66,11 @@ public class conexion_BBDD {
 	 * @param tipo_beca       datos beca
 	 * @return true en caso de exito, false en caso contrario
 	 */
-	private boolean aniadirBeca(String nombre, String condiciones, String descripcion, String contacto,
-			String nombreProveedor, becapp.tipo_beca tipo_beca) {
+	public boolean aniadirBeca(Beca b) {
 
 		boolean alta = false;
 		// convertimos el enum a String
-		String tBeca = tipo_beca.toString();
+		String tBeca = b.getTipo_beca().toString();
 		int cod;
 
 		// En proceos de evaluacion
@@ -86,11 +85,11 @@ public class conexion_BBDD {
 
 			ps = connection.prepareStatement("insert into becas values(?,?,?,?,?,?,?)");
 			ps.setInt(1, cod);
-			ps.setString(2, nombre);
-			ps.setString(3, condiciones);
-			ps.setString(4, descripcion);
-			ps.setString(5, contacto);
-			ps.setString(6, nombreProveedor);
+			ps.setString(2, b.getNombre());
+			ps.setString(3, b.getCondiciones());
+			ps.setString(4, b.getDescripcion());
+			ps.setString(5, b.getContacto());
+			ps.setString(6, b.getNombreProveedor());
 			ps.setString(7, tBeca);
 			ps.executeUpdate();
 
@@ -112,7 +111,7 @@ public class conexion_BBDD {
 	 * @param cod numero de beca referencia para el borrado
 	 * @return true en caso de exito, false en caso contrario
 	 */
-	private boolean borrarBeca(int cod) {
+	public boolean borrarBeca(int cod) {
 
 		boolean borrado = false;
 
@@ -142,7 +141,7 @@ public class conexion_BBDD {
 	 * @param actualizacion dato que se cambia en la columna
 	 * @return true en caso de exito, false en caso contrario
 	 */
-	private boolean modificarBeca(String columna, int cod, String actualizacion) {
+	public boolean modificarBeca(String columna, int cod, String actualizacion) {
 
 		boolean modificado = false;
 
@@ -216,7 +215,7 @@ public class conexion_BBDD {
 			cod = rs.getInt(1) + 1;
 
 			ps = connection.prepareStatement("insert into becas values(?,?,?,?,?,?,?,?,?,?,?,?)");
-			ps.setInt(1, a.getId_usuario());
+			ps.setInt(1, cod);
 			ps.setString(2, a.getDni());
 			ps.setString(3, a.getNombre());
 			ps.setString(4, a.getApellido());
@@ -270,9 +269,10 @@ public class conexion_BBDD {
 
 		return borrado;
 	}
-	
+
 	/**
-	 * Metodo que devuelve una lista completa de todo los administradores que tenemos en la tabla administradores
+	 * Metodo que devuelve una lista completa de todo los administradores que
+	 * tenemos en la tabla administradores
 	 * 
 	 * @return variable String con toda la informacion
 	 */

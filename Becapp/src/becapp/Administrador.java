@@ -6,16 +6,16 @@ public class Administrador extends Usuario {
 
 	private String clave;
 
-	private boolean estado;
+	private String estado;
 
 	private String descripcion_puesto;
 
 	private Date fecha_inc;
 
 	
-	public Administrador(int id_usuario, String dni, String nombre, String apellido, String nacionalidad, String email,
-			int telf, Date fecha_nac, String clave, boolean estado, String descripcion_puesto) {
-		super(id_usuario, dni, nombre, apellido, nacionalidad, email, telf, fecha_nac);
+	public Administrador( String dni, String nombre, String apellido, String nacionalidad, String email,
+			int telf, Date fecha_nac, String clave, String estado, String descripcion_puesto) {
+		super(dni, nombre, apellido, nacionalidad, email, telf, fecha_nac);
 		this.clave = clave;
 		this.estado = estado;
 		this.descripcion_puesto = descripcion_puesto;
@@ -25,7 +25,9 @@ public class Administrador extends Usuario {
 		return clave;
 	}
 
-	public boolean isEstado() {
+	
+
+	public String getEstado() {
 		return estado;
 	}
 

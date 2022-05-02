@@ -6,13 +6,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class conexion_BBDD {
+public class Conexion_BBDD {
 
 	// datos pendientes de cambiar a la base de datos valida
 
 	private String bd = "XE";
-	private String login = "TALLER";
-	private String password = "TALLER";
+	private String login = "ADMINISTRADOR";
+	private String password = "ADMINISTRADOR";
 	private String url = "jdbc:oracle:thin:@localhost:1521:" + bd;
 	java.sql.Statement st = null;
 	java.sql.ResultSet rs = null;
@@ -71,17 +71,20 @@ public class conexion_BBDD {
 		boolean alta = false;
 		// convertimos el enum a String
 		String tBeca = b.getTipo_beca().toString();
-		int cod;
+		int cod = 0;
 
 		// En proceos de evaluacion
 		// Beca beca = new Beca(nombre, condiciones, descripcion, contacto,
 		// nombreProveedor, tipo_beca);
 
-		PreparedStatement ps;
 		try {
-			ps = connection.prepareStatement("select max(cod)from becas");
+			PreparedStatement ps = connection.prepareStatement("select max(cod) from becas");
 			rs = ps.executeQuery();
-			cod = rs.getInt(1) + 1;
+
+			while (rs.next()) {
+				System.out.println(rs.getInt(1));
+				cod = rs.getInt(1) + 1;
+			}
 
 			ps = connection.prepareStatement("insert into becas values(?,?,?,?,?,?,?)");
 			ps.setInt(1, cod);
@@ -97,6 +100,7 @@ public class conexion_BBDD {
 
 		} catch (SQLException e) {
 			System.out.println("no se encuantan los datos en la base de datos");
+			e.printStackTrace();
 			alta = false;
 			return alta;
 		}
@@ -119,7 +123,7 @@ public class conexion_BBDD {
 
 		try {
 			ps = connection.prepareStatement("delete from becas where cod=" + cod);
-			rs = ps.executeQuery();
+			ps.executeQuery();
 
 			borrado = true;
 
@@ -148,9 +152,8 @@ public class conexion_BBDD {
 		PreparedStatement ps;
 
 		try {
-			ps = connection
-					.prepareStatement("update becas set " + columna + " = " + actualizacion + " where ncliente=" + cod);
-			rs = ps.executeQuery();
+			ps = connection.prepareStatement("update becas set " + columna + " = '" + actualizacion + "' where cod= " + cod);
+			ps.executeUpdate();
 
 			modificado = true;
 
@@ -205,16 +208,20 @@ public class conexion_BBDD {
 	public boolean darAltaAdmin(Administrador a) {
 
 		boolean alta = false;
-		int cod;
+		int cod = 0;
 
 		PreparedStatement ps;
 		try {
 			ps = connection.prepareStatement("select max(id_usuario)from administradores");
 			rs = ps.executeQuery();
 			// variar en un futuro para poder hacer la incorpoacion en una tabla vacia
-			cod = rs.getInt(1) + 1;
+			
+			while (rs.next()) {
+			
+				cod = rs.getInt(1) + 1;
+			}
 
-			ps = connection.prepareStatement("insert into becas values(?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps = connection.prepareStatement("insert into administradores values(?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, cod);
 			ps.setString(2, a.getDni());
 			ps.setString(3, a.getNombre());
@@ -223,9 +230,10 @@ public class conexion_BBDD {
 			ps.setString(6, a.getEmail());
 			ps.setInt(7, a.getTelf());
 			// pendiente de ver al interaccion de este dato
-			ps.setDate(8, (Date) a.getFecha_nac());
+			//ps.setDate(8,"sysdate");
+			ps.setString(8, "sysdate");			
 			ps.setString(9, a.getClave());
-			ps.setBoolean(10, a.isEstado());
+			ps.setString(10, a.getEstado());
 			ps.setString(11, a.getDescripcion_puesto());
 			ps.setString(12, "sysdate");
 			ps.executeUpdate();
@@ -233,7 +241,8 @@ public class conexion_BBDD {
 			alta = true;
 
 		} catch (SQLException e) {
-			System.out.println("no se insertar los datos");
+			System.out.println("no se han insertar los datos");
+			e.printStackTrace();
 			alta = false;
 			return alta;
 		}
@@ -256,13 +265,14 @@ public class conexion_BBDD {
 		PreparedStatement ps;
 
 		try {
-			ps = connection.prepareStatement("delete from administradores where id_usuario=" + id_usuario);
-			rs = ps.executeQuery();
+			ps = connection.prepareStatement("delete from administradores where id_usuario= " + id_usuario);
+			ps.executeQuery();
 
 			borrado = true;
 
 		} catch (SQLException e) {
 			System.out.println("No se a podido realizar el borrado del administrador");
+			e.printStackTrace();
 			borrado = false;
 			return borrado;
 		}
@@ -285,18 +295,19 @@ public class conexion_BBDD {
 		try {
 			ps = connection.prepareStatement("select * from administradores");
 			rs = ps.executeQuery();
+			
 			while (rs.next()) {
 
 				lista += "Codigo administrador " + rs.getInt(1) + " dni = " + rs.getString(2) + " nombre= "
 						+ rs.getString(3) + " apellido= " + rs.getString(4) + " nacionalidad= " + rs.getString(5)
 						+ " email= " + rs.getString(6) + " telfono= " + rs.getInt(7) + " fecha nacimiento= "
-						+ rs.getString(8) + " clave= " + rs.getString(9) + " estado= " + rs.getBoolean(10)
+						+ rs.getDate(8) + " clave= " + rs.getString(9) + " estado= " + rs.getString(10)
 						+ " Descripcion puesto= " + rs.getString(11) + " fecha inicio= " + rs.getDate(12) + "\n";
 
 			}
 
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 			return "La lista no se ha podido cargar";
 		}
 

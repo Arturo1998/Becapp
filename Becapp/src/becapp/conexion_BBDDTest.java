@@ -14,7 +14,7 @@ public class conexion_BBDDTest {
 		// beca valida
 		Beca b = new Beca("luis", "vivir en madrid", "beca para estudiantes", "santander@gmail.com", "banco santander",
 				tipo_beca.PRIVADA);
-		conexion_BBDD c = new conexion_BBDD();
+		Conexion_BBDD c = new Conexion_BBDD();
 		boolean resultado = c.aniadirBeca(b);
 		assertTrue(resultado);
 
@@ -24,7 +24,7 @@ public class conexion_BBDDTest {
 	public void testBorrarBeca() {
 		// si no existe no lanzara false y no se borrara
 		int cod = 2;
-		conexion_BBDD c = new conexion_BBDD();
+		Conexion_BBDD c = new Conexion_BBDD();
 		boolean resultado = c.borrarBeca(cod);
 		assertTrue(resultado);
 	}
@@ -38,14 +38,14 @@ public class conexion_BBDDTest {
 		// campo actualizado
 		String actualizacion = "luis";
 
-		conexion_BBDD c = new conexion_BBDD();
+		Conexion_BBDD c = new Conexion_BBDD();
 		boolean resultado = c.modificarBeca(columna, cod, actualizacion);
 		assertTrue(resultado);
 	}
 
 	@Test
 	public void testListarBecas() {
-		conexion_BBDD c = new conexion_BBDD();
+		Conexion_BBDD c = new Conexion_BBDD();
 		String resultado = c.listarBecas();
 		// se puede testear este metodo????
 	}
@@ -67,12 +67,12 @@ public class conexion_BBDDTest {
 		int telf = 654654654;
 		Date fecha_nac = d;// pendiente de preguntar como hacerlo;
 		String clave = "clave";
-		boolean estado = false;
+		String estado = "activo";
 		String descripcion_puesto = "Administrador jefe";
 
-		Administrador a = new Administrador(id_usuario, dni, nombre, apellido, nacionalidad, email, telf, fecha_nac,
+		Administrador a = new Administrador( dni, nombre, apellido, nacionalidad, email, telf, fecha_nac,
 				clave, estado, descripcion_puesto);
-		conexion_BBDD c = new conexion_BBDD();
+		Conexion_BBDD c = new Conexion_BBDD();
 
 		boolean resultado = c.darAltaAdmin(a);
 		assertTrue(resultado);
@@ -82,7 +82,7 @@ public class conexion_BBDDTest {
 	@Test
 	public void testDarBajaAdmin() {
 		int id = 2;
-		conexion_BBDD c = new conexion_BBDD();
+		Conexion_BBDD c = new Conexion_BBDD();
 		boolean resultado = c.darBajaAdmin(id);
 		assertTrue(resultado);
 
@@ -90,9 +90,9 @@ public class conexion_BBDDTest {
 
 	@Test
 	public void testMostrarAdmin() {
-		conexion_BBDD c = new conexion_BBDD();
+		Conexion_BBDD c = new Conexion_BBDD();
 		String resultado = c.mostrarAdmin();
-		//Ser puede testear este metodo?
+		//Se puede testear este metodo?
 	}
 
 }

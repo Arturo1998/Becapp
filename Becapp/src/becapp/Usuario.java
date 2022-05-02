@@ -22,7 +22,7 @@ public class Usuario {
 	
 	
 
-	public Usuario(int id_usuario, String dni, String nombre, String apellido, String nacionalidad, String email,
+	public Usuario(String dni, String nombre, String apellido, String nacionalidad, String email,
 			int telf, Date fecha_nac) {
 		super();
 		this.id_usuario = id_usuario;

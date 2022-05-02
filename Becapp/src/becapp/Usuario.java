@@ -19,6 +19,8 @@ public class Usuario {
   private Integer telf;
 
   private Date fecha_nac;
+  
+  
 
   
 }

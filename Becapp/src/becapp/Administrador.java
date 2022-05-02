@@ -11,7 +11,11 @@ public class Administrador extends Usuario {
   private String descripcion_puesto;
 
   private Date fecha_inc;
-
+  
+  /**
+   * 
+   Psar a BBDD
+   
   private void aniadirBeca() {
   }
 
@@ -29,9 +33,10 @@ public class Administrador extends Usuario {
 
   public void darBajaAdmin(String dni) {
   }
+ 
 
   public String mostrarAdmin() {
   return null;
   }
-
+ **/
 }

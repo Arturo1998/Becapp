@@ -25,7 +25,6 @@ public class Usuario {
 	public Usuario(String dni, String nombre, String apellido, String nacionalidad, String email,
 			int telf, Date fecha_nac) {
 		super();
-		this.id_usuario = id_usuario;
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;

@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 public class Conexion_BBDD {
 
 	// datos pendientes de cambiar a la base de datos valida
@@ -82,7 +84,6 @@ public class Conexion_BBDD {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				System.out.println(rs.getInt(1));
 				cod = rs.getInt(1) + 1;
 			}
 
@@ -114,23 +115,35 @@ public class Conexion_BBDD {
 	 * 
 	 * @param cod numero de beca referencia para el borrado
 	 * @return true en caso de exito, false en caso contrario
+	 * @throws SQLException
 	 */
-	public boolean borrarBeca(int cod) {
+	public boolean borrarBeca(String dato, int condicion) {
 
 		boolean borrado = false;
 
 		PreparedStatement ps;
 
 		try {
-			ps = connection.prepareStatement("delete from becas where cod=" + cod);
+			// como solventar los capos vacios para el borrado?????
+
+			if (dato.isBlank() || dato.isEmpty()) {
+
+				throw new Exception();
+			}
+
+			String filtro = menuFiltro(dato, condicion, false);
+
+			ps = connection.prepareStatement("delete from becas where " + filtro + " like upper('%" + dato + "%')");
 			ps.executeQuery();
 
 			borrado = true;
 
 		} catch (SQLException e) {
-			System.out.println("No se a podido realizar el borrado de la beca");
+			e.printStackTrace();
 			borrado = false;
 			return borrado;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Atecion: el campo esta vacio");
 		}
 
 		return borrado;
@@ -152,10 +165,19 @@ public class Conexion_BBDD {
 		PreparedStatement ps;
 
 		try {
-			ps = connection.prepareStatement("update becas set " + columna + " = '" + actualizacion + "' where cod= " + cod);
-			ps.executeUpdate();
-
-			modificado = true;
+			
+			
+			ps = connection
+					.prepareStatement("update becas set " + columna + " = '" + actualizacion + "' where cod= " + cod);
+			int up=ps.executeUpdate();
+			
+			if (up==2){
+				modificado=false;
+			}
+			else {
+				modificado=true;
+			}
+		
 
 		} catch (SQLException e) {
 			System.out.println("No se a podido realizar la actualizacion de la beca");
@@ -179,7 +201,7 @@ public class Conexion_BBDD {
 		String lista = "";
 
 		try {
-			ps = connection.prepareStatement("select * from becas");
+			ps = connection.prepareStatement("select * from becas order by 1");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -195,6 +217,92 @@ public class Conexion_BBDD {
 		}
 
 		return lista;
+	}
+
+	/**
+	 * Metodo destinado a buscar informacion en la base de datos basado en una
+	 * palabra y con una condicion que define el tipo de busqueda que se va a hacer
+	 * 
+	 * @param dato      palabra que hace de filtro en el campo
+	 * @param condicion 1 2 o 3 segun si queremos buscar por id, nombre de beca o
+	 *                  nombre de proveedor
+	 * @return String con la informacion encontrada
+	 */
+
+	public String buscarDatosBeca(String dato, int condicion) {
+
+		boolean exi = false;
+		String lista = "";
+		String filtro = null;
+
+		PreparedStatement ps;
+		try {
+
+			menuFiltro(dato, condicion, true);
+
+			while (rs.next()) {
+
+				lista += "Codigo beca= " + rs.getInt(1) + " nombre beca = " + rs.getString(2) + " descripcion= "
+						+ rs.getString(4) + " contacto= " + rs.getString(5) + " nombre proveedor= " + rs.getString(6)
+						+ " tipo de beca= " + rs.getString(7) + "\n";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+
+	/**
+	 * metodo que recoge dato y condicion de de busqueda
+	 * 
+	 * @param dato      es la informacion que buscamos
+	 * @param condicion es el filtro por el cual queremos buscar esta informacion
+	 * 
+	 * @throws SQLException subimos la excepcion de funcionamiento SQL
+	 */
+
+	private String menuFiltro(String dato, int condicion, boolean buscar) throws SQLException {
+
+		String filtro = null;
+
+		PreparedStatement ps;
+
+		switch (condicion) {
+		case 1:
+
+			filtro = "cod";
+			if (buscar) {
+				ps = connection.prepareStatement("select * from becas where " + filtro + "=" + dato);
+				rs = ps.executeQuery();
+			}
+			break;
+
+		case 2:
+			filtro = "nombre";
+			if (buscar) {
+				ps = connection
+						.prepareStatement("select * from becas where " + filtro + " like upper('%" + dato + "%')");
+				rs = ps.executeQuery();
+			}
+
+			break;
+		case 3:
+			filtro = "nombreproveedor";
+			if (buscar) {
+				ps = connection
+						.prepareStatement("select * from becas where " + filtro + " like upper('%" + dato + "%')");
+				rs = ps.executeQuery();
+
+			}
+			break;
+
+		default:
+			break;
+
+		}
+		return filtro;
 	}
 
 	/**
@@ -215,13 +323,13 @@ public class Conexion_BBDD {
 			ps = connection.prepareStatement("select max(id_usuario)from administradores");
 			rs = ps.executeQuery();
 			// variar en un futuro para poder hacer la incorpoacion en una tabla vacia
-			
+
 			while (rs.next()) {
-			
+
 				cod = rs.getInt(1) + 1;
 			}
 
-			ps = connection.prepareStatement("insert into administradores values(?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps = connection.prepareStatement("insert into administradores values(?,?,?,?,?,?,?,sysdate,?,?,?,sysdate)");
 			ps.setInt(1, cod);
 			ps.setString(2, a.getDni());
 			ps.setString(3, a.getNombre());
@@ -230,12 +338,12 @@ public class Conexion_BBDD {
 			ps.setString(6, a.getEmail());
 			ps.setInt(7, a.getTelf());
 			// pendiente de ver al interaccion de este dato
-			//ps.setDate(8,"sysdate");
-			ps.setString(8, "sysdate");			
-			ps.setString(9, a.getClave());
-			ps.setString(10, a.getEstado());
-			ps.setString(11, a.getDescripcion_puesto());
-			ps.setString(12, "sysdate");
+			// ps.setDate(8,"sysdate");
+			// ps.setString(8, "sysdate");
+			ps.setString(8, a.getClave());
+			ps.setString(9, a.getEstado());
+			ps.setString(10, a.getDescripcion_puesto());
+			// ps.setString(11, "sysdate");
 			ps.executeUpdate();
 
 			alta = true;
@@ -295,7 +403,7 @@ public class Conexion_BBDD {
 		try {
 			ps = connection.prepareStatement("select * from administradores");
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 
 				lista += "Codigo administrador " + rs.getInt(1) + " dni = " + rs.getString(2) + " nombre= "

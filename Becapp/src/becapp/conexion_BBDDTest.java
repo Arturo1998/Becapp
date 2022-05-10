@@ -23,9 +23,10 @@ public class conexion_BBDDTest {
 	@Test
 	public void testBorrarBeca() {
 		// si no existe no lanzara false y no se borrara
-		int cod = 2;
+		int condicion=1;
+		String dato="123";
 		Conexion_BBDD c = new Conexion_BBDD();
-		boolean resultado = c.borrarBeca(cod);
+		boolean resultado = c.borrarBeca(dato,condicion);
 		assertTrue(resultado);
 	}
 

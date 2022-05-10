@@ -1,6 +1,6 @@
 package becapp;
 
-enum tipo_beca {
+public enum tipo_beca {
 
   PUBLICA,
 

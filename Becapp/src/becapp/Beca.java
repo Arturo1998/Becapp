@@ -65,6 +65,12 @@ public String getNombreProveedor() {
 public tipo_beca getTipo_beca() {
 	return tipo_beca;
 }
+
+@Override
+public String toString() {
+	return "Beca [ nombre=" + nombre + ", condiciones=" + condiciones + ", descripcion=" + descripcion
+			+ ", contacto=" + contacto + ", nombreProveedor=" + nombreProveedor + ", tipo_beca=" + tipo_beca + "]";
+}
   
 
 }

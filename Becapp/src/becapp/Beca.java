@@ -2,75 +2,89 @@ package becapp;
 
 public class Beca {
 
-  private int cod;
+	private int cod;
 
-  private String nombre;
+	private String nombre;
 
-  private String condiciones;
+	private String condiciones;
 
-  private String descripcion;
+	private String descripcion;
 
-  private String contacto;
+	private String contacto;
 
-  private String nombreProveedor;
+	private String nombreProveedor;
 
-  public tipo_beca tipo_beca;
-  
-  
+	public tipo_beca tipo_beca;
 
-  public Beca(String nombre, String condiciones, String descripcion, String contacto, String nombreProveedor,
-		becapp.tipo_beca tipo_beca) {
-	super();
-	this.nombre = nombre;
-	this.condiciones = condiciones;
-	this.descripcion = descripcion;
-	this.contacto = contacto;
-	this.nombreProveedor = nombreProveedor;
-	this.tipo_beca = tipo_beca;
-		
-}
+	public Beca(String nombre, String condiciones, String descripcion, String contacto, String nombreProveedor,
+			becapp.tipo_beca tipo_beca) {
+		super();
+		this.nombre = nombre;
+		this.condiciones = condiciones;
+		this.descripcion = descripcion;
+		this.contacto = contacto;
+		this.nombreProveedor = nombreProveedor;
+		this.tipo_beca = tipo_beca;
 
-public String mostrarBeca() {
-  return null;
-  }
+	}
 
-  public int buscarBeca(String nombre) {
-  return 1;
-  }
+	public Beca(int cod, String nombre, String condiciones, String descripcion, String contacto, String nombreProveedor,
+			becapp.tipo_beca tipo_beca) {
+		super();
+		this.cod = cod;
+		this.nombre = nombre;
+		this.condiciones = condiciones;
+		this.descripcion = descripcion;
+		this.contacto = contacto;
+		this.nombreProveedor = nombreProveedor;
+		this.tipo_beca = tipo_beca;
 
-  public String solicitarContacto() {
-  return "contacto";
-  }
+	}
 
-public String getNombre() {
-	return nombre;
-}
+	public String mostrarBeca() {
+		return null;
+	}
 
-public String getCondiciones() {
-	return condiciones;
-}
+	public int buscarBeca(String nombre) {
+		return 1;
+	}
 
-public String getDescripcion() {
-	return descripcion;
-}
+	public String solicitarContacto() {
+		return "contacto";
+	}
 
-public String getContacto() {
-	return contacto;
-}
+	public String getNombre() {
+		return nombre;
+	}
 
-public String getNombreProveedor() {
-	return nombreProveedor;
-}
+	public String getCondiciones() {
+		return condiciones;
+	}
 
-public tipo_beca getTipo_beca() {
-	return tipo_beca;
-}
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-@Override
-public String toString() {
-	return "Beca [ nombre=" + nombre + ", condiciones=" + condiciones + ", descripcion=" + descripcion
-			+ ", contacto=" + contacto + ", nombreProveedor=" + nombreProveedor + ", tipo_beca=" + tipo_beca + "]";
-}
-  
+	public String getContacto() {
+		return contacto;
+	}
+
+	public String getNombreProveedor() {
+		return nombreProveedor;
+	}
+
+	public tipo_beca getTipo_beca() {
+		return tipo_beca;
+	}
+
+	public int getCod() {
+		return cod;
+	}
+
+	@Override
+	public String toString() {
+		return "Beca [ nombre=" + nombre + ", condiciones=" + condiciones + ", descripcion=" + descripcion
+				+ ", contacto=" + contacto + ", nombreProveedor=" + nombreProveedor + ", tipo_beca=" + tipo_beca + "]";
+	}
 
 }

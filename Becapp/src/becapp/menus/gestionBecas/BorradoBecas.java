@@ -1,9 +1,11 @@
-package becapp.menus;
+package becapp.menus.gestionBecas;
 
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
@@ -23,6 +25,7 @@ import javax.swing.JTextPane;
 import becapp.Conexion_BBDD;
 import becapp.menus.Ficheros.Log;
 import becapp.menus.Ficheros.Tipo_movimiento;
+import becapp.menus.metodos.MetodosMenus;
 
 public class BorradoBecas extends JFrame {
 
@@ -35,6 +38,15 @@ public class BorradoBecas extends JFrame {
 		setTitle("GESTION: BORRAR BECAS");
 		setBounds(500, 300, 600, 450);
 		getContentPane().setLayout(null);
+		
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				MetodosMenus mm = new MetodosMenus();
+				mm.confirmarSalida();
+			}
+		});
 
 		JTextPane campoC = new JTextPane();
 		campoC.setText("Seleccionar campo para el borrado de la beca:");
@@ -62,9 +74,11 @@ public class BorradoBecas extends JFrame {
 
 		id.addActionListener(new ActionListener() {
 
+			private Conexion_BBDD conexion;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Conexion_BBDD conexion = new Conexion_BBDD();
+				conexion = new Conexion_BBDD();
 				conexion.conectar();
 				name = JOptionPane.showInputDialog("Introduzca ID de la beca");
 				grupo1.clearSelection();
@@ -80,9 +94,10 @@ public class BorradoBecas extends JFrame {
 		});
 		nombre.addActionListener(new ActionListener() {
 
+			private Conexion_BBDD conexion;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Conexion_BBDD conexion = new Conexion_BBDD();
+				conexion = new Conexion_BBDD();
 				conexion.conectar();
 				name = JOptionPane.showInputDialog("Introduzca nombre de la beca");
 				grupo1.clearSelection();
@@ -97,8 +112,10 @@ public class BorradoBecas extends JFrame {
 
 			}
 		});
+		
 
 		nombreProveedor.addActionListener(new ActionListener() {
+			
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -136,7 +153,6 @@ public class BorradoBecas extends JFrame {
 
 				dispose();
 				GestionBecas gb = new GestionBecas();
-				gb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				gb.setVisible(true);
 
 			}

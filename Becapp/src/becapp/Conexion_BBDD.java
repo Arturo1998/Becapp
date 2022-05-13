@@ -1,10 +1,10 @@
 package becapp;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -165,19 +165,16 @@ public class Conexion_BBDD {
 		PreparedStatement ps;
 
 		try {
-			
-			
+
 			ps = connection
 					.prepareStatement("update becas set " + columna + " = '" + actualizacion + "' where cod= " + cod);
-			int up=ps.executeUpdate();
-			
-			if (up==2){
-				modificado=false;
+			int up = ps.executeUpdate();
+
+			if (up == 2) {
+				modificado = false;
+			} else {
+				modificado = true;
 			}
-			else {
-				modificado=true;
-			}
-		
 
 		} catch (SQLException e) {
 			System.out.println("No se a podido realizar la actualizacion de la beca");
@@ -219,6 +216,40 @@ public class Conexion_BBDD {
 		return lista;
 	}
 
+	public ArrayList<Beca> listarBecasArray() {
+
+		ArrayList<Beca> datos = new ArrayList<Beca>();
+
+		PreparedStatement ps;
+
+		try {
+			ps = connection.prepareStatement("select * from becas order by 1");
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String tipo = rs.getString(7);
+				tipo_beca tp = null;
+
+				if (tipo.equals("PRIVADA")) {
+					tp = tp.PRIVADA;
+				} else {
+					tp = tp.PUBLICA;
+
+				}
+
+				Beca b = new Beca(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(6), tp);
+				datos.add(b);
+			}
+
+		} catch (SQLException e) {
+
+			System.out.println("La lista no se ha podido cargar");
+		}
+
+		return datos;
+	}
+
 	/**
 	 * Metodo destinado a buscar informacion en la base de datos basado en una
 	 * palabra y con una condicion que define el tipo de busqueda que se va a hacer
@@ -231,20 +262,18 @@ public class Conexion_BBDD {
 
 	public String buscarDatosBeca(String dato, int condicion) {
 
-		boolean exi = false;
 		String lista = "";
-		String filtro = null;
+		String filtro;
 
-		PreparedStatement ps;
 		try {
 
-			menuFiltro(dato, condicion, true);
+			filtro = menuFiltro(dato, condicion, true);
 
 			while (rs.next()) {
 
 				lista += "Codigo beca= " + rs.getInt(1) + " nombre beca = " + rs.getString(2) + " descripcion= "
 						+ rs.getString(4) + " contacto= " + rs.getString(5) + " nombre proveedor= " + rs.getString(6)
-						+ " tipo de beca= " + rs.getString(7) + "\n";
+						+ " tipo de beca= " + rs.getString(7);
 
 			}
 		} catch (Exception e) {
@@ -263,7 +292,7 @@ public class Conexion_BBDD {
 	 * @throws SQLException subimos la excepcion de funcionamiento SQL
 	 */
 
-	private String menuFiltro(String dato, int condicion, boolean buscar) throws SQLException {
+	public String menuFiltro(String dato, int condicion, boolean buscar) throws SQLException {
 
 		String filtro = null;
 
@@ -303,6 +332,25 @@ public class Conexion_BBDD {
 
 		}
 		return filtro;
+	}
+
+	public String informacionActualizacion(int cod) throws SQLException {
+
+		PreparedStatement ps;
+		String lista = "";
+
+		ps = connection.prepareStatement("select * from becas where cod=" + cod);
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+
+			lista += "Codigo beca= " + rs.getInt(1) + " nombre beca = " + rs.getString(2) + " descripcion= "
+					+ rs.getString(4) + " contacto= " + rs.getString(5) + " nombre proveedor= " + rs.getString(6)
+					+ " tipo de beca= " + rs.getString(7) + "\n";
+
+		}
+
+		return lista;
 	}
 
 	/**

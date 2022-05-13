@@ -1,1 +1,49 @@
-INTRODUCIR_BECA Tue May 10 11:54:02 CEST 2022 Beca [ nombre=SANTANDER, condiciones=BACHILLERATO, descripcion=ESTA ES UNA BECA PARA ESTUDIAR, contacto=SANTANDER@SANTANDER, nombreProveedor=SANTANDER, tipo_beca=PRIVADA]BORRAR_BECA Tue May 10 11:54:55 CEST 2022 Codigo beca= 3 nombre beca = SANTANDER descripcion= ESTA ES UNA BECA PARA ESTUDIAR contacto= SANTANDER@SANTANDER nombre proveedor= SANTANDER tipo de beca= PRIVADA
+INTRODUCIR_BECA Tue May 10 12:37:21 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PRIVADA]
+BORRAR_BECA Tue May 10 13:03:33 CEST 2022 
+BORRAR_BECA Tue May 10 13:03:58 CEST 2022 Codigo beca= 2 nombre beca = Kmaxo descripcion= null contacto= null nombre proveedor= null tipo de beca= PRIVADA
+
+BORRAR_BECA Tue May 10 13:04:35 CEST 2022 Codigo beca= 3 nombre beca = null descripcion= null contacto= null nombre proveedor= null tipo de beca= PRIVADA
+
+MODIFICAR_BECA Tue May 10 13:58:42 CEST 2022 santander
+MODIFICAR_BECA Tue May 10 14:05:27 CEST 2022 
+MODIFICAR_BECA Tue May 10 14:05:55 CEST 2022 
+MODIFICAR_BECA Tue May 10 14:59:36 CEST 2022 Codigo beca= 4 nombre beca = eduardo descripcion= prueba contacto= geg nombre proveedor= santander tipo de beca= PRIVADA 
+MODIFICAR_BECA Tue May 10 15:13:31 CEST 2022 Codigo beca= 4 nombre beca = eduardo descripcion= prueba contacto= geg nombre proveedor= caja madrid tipo de beca= PRIVADA 
+MODIFICAR_BECA Tue May 10 15:22:01 CEST 2022 Codigo beca= 4 nombre beca = eduardo descripcion= prueba contacto= eree nombre proveedor= caja madrid tipo de beca= PRIVADA 
+BORRAR_BECA Tue May 10 15:45:41 CEST 2022 
+BORRAR_BECA Tue May 10 15:49:03 CEST 2022 
+MODIFICAR_BECA Tue May 10 17:16:12 CEST 2022 Codigo beca= 4 nombre beca = EDUARDO descripcion= prueba contacto= eree nombre proveedor= CAIXA tipo de beca= PRIVADA 
+BORRAR_BECA Tue May 10 17:16:59 CEST 2022 Codigo beca= 4 nombre beca = EDUARDO descripcion= prueba contacto= eree nombre proveedor= CAIXA tipo de beca= PRIVADA
+
+INTRODUCIR_BECA Tue May 10 17:18:22 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PUBLICA]
+BORRAR_BECA Tue May 10 17:18:42 CEST 2022 Codigo beca= 1 nombre beca = null descripcion= null contacto= null nombre proveedor= null tipo de beca= PUBLICA
+
+INTRODUCIR_BECA Tue May 10 17:20:10 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PRIVADA]
+INTRODUCIR_BECA Tue May 10 17:20:12 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PRIVADA]
+INTRODUCIR_BECA Tue May 10 17:20:14 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PRIVADA]
+INTRODUCIR_BECA Tue May 10 17:20:16 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PUBLICA]
+INTRODUCIR_BECA Wed May 11 08:26:53 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PRIVADA]
+MODIFICAR_BECA Wed May 11 08:27:41 CEST 2022 Codigo beca= 5 nombre beca = null descripcion= null contacto= CORREO nombre proveedor= null tipo de beca= PRIVADA 
+MODIFICAR_BECA Wed May 11 08:29:53 CEST 2022 Codigo beca= 5 nombre beca = null descripcion= BECA EUROPEA contacto= CORREO nombre proveedor= null tipo de beca= PRIVADA 
+INTRODUCIR_BECA Wed May 11 13:33:18 CEST 2022 Beca [ nombre=GGGG, condiciones=GG, descripcion=GG, contacto=GG, nombreProveedor=GGG, tipo_beca=PRIVADA]
+BORRAR_BECA Wed May 11 13:33:38 CEST 2022 Codigo beca= 5 nombre beca = null descripcion= BECA EUROPEA contacto= CORREO nombre proveedor= null tipo de beca= PRIVADA
+
+INTRODUCIR_BECA Wed May 11 15:47:44 CEST 2022 Beca [ nombre=BECA NACIONAL, condiciones=MAS DE 5000, descripcion=5000, contacto=SANTANDER@SANTANDER.COM, nombreProveedor=SANTANDER, tipo_beca=PRIVADA]
+BORRAR_BECA Wed May 11 15:47:58 CEST 2022 Codigo beca= 1 nombre beca = null descripcion= null contacto= null nombre proveedor= null tipo de beca= PRIVADA
+
+BORRAR_BECA Wed May 11 15:48:04 CEST 2022 Codigo beca= 3 nombre beca = null descripcion= null contacto= null nombre proveedor= null tipo de beca= PRIVADA
+
+BORRAR_BECA Wed May 11 15:48:13 CEST 2022 Codigo beca= 4 nombre beca = null descripcion= null contacto= null nombre proveedor= null tipo de beca= PUBLICA
+
+INTRODUCIR_BECA Wed May 11 19:20:36 CEST 2022 Beca [ nombre=BECA NACIONAL, condiciones=MAS DE 2000, descripcion=5000 EUROS, contacto=CAIXA@GMAIL.COM, nombreProveedor=CAIXA, tipo_beca=PRIVADA]
+BORRAR_BECA Wed May 11 19:42:07 CEST 2022 Codigo beca= 6 nombre beca = GGGG descripcion= GG contacto= GG nombre proveedor= GGG tipo de beca= PRIVADA
+
+BORRAR_BECA Wed May 11 19:42:23 CEST 2022 Codigo beca= 7 nombre beca = BECA NACIONAL descripcion= 5000 contacto= SANTANDER@SANTANDER.COM nombre proveedor= SANTANDER tipo de beca= PRIVADA
+
+BORRAR_BECA Wed May 11 19:49:38 CEST 2022 Codigo beca= 8 nombre beca = BECA NACIONAL descripcion= 5000 EUROS contacto= CAIXA@GMAIL.COM nombre proveedor= CAIXA tipo de beca= PRIVADA
+INTRODUCIR_BECA Wed May 11 19:49:53 CEST 2022 Beca [ nombre=DDD, condiciones=DDD, descripcion=DDD, contacto=DDD, nombreProveedor=DDD, tipo_beca=PRIVADA]
+INTRODUCIR_BECA Wed May 11 19:50:53 CEST 2022 Beca [ nombre=DDD, condiciones=DDD, descripcion=DD, contacto=DDD, nombreProveedor=DDD, tipo_beca=PRIVADA]
+INTRODUCIR_BECA Wed May 11 19:53:00 CEST 2022 Beca [ nombre=EEE, condiciones=, descripcion=, contacto=, nombreProveedor=EDUARDO, tipo_beca=PRIVADA]
+INTRODUCIR_BECA Wed May 11 20:41:08 CEST 2022 Beca [ nombre=BECA PLS, condiciones=SER LATINO, descripcion=5000 EUROS, contacto=PLSER@LIO.COM, nombreProveedor=PLSER, tipo_beca=PRIVADA]
+INTRODUCIR_BECA Thu May 12 21:26:26 CEST 2022 Beca [ nombre=, condiciones=, descripcion=, contacto=, nombreProveedor=, tipo_beca=PRIVADA]
+BORRAR_BECA Thu May 12 23:14:33 CEST 2022 Codigo beca= 4 nombre beca = BECA PLS descripcion= 5000 EUROS contacto= PLSER@LIO.COM nombre proveedor= PLSER tipo de beca= PRIVADA

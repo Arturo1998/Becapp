@@ -64,7 +64,7 @@ public class Log {
 		bw.write(fecha_hora.toString());
 		bw.write(" ");
 		bw.write(detalle);
-	
+		bw.newLine();
 
 		bw.close();
 		fw.close();

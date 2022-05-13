@@ -1,10 +1,11 @@
-package becapp.menus;
+package becapp.menus.gestionBecas;
 
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
@@ -12,7 +13,6 @@ import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,6 +23,7 @@ import javax.swing.JTextPane;
 import becapp.tipo_beca;
 import becapp.menus.Ficheros.Log;
 import becapp.menus.Ficheros.Tipo_movimiento;
+import becapp.menus.metodos.MetodosMenus;
 import becapp.Beca;
 import becapp.Conexion_BBDD;
 
@@ -41,8 +42,16 @@ public class FormularioBeca extends JFrame {
 	public FormularioBeca() {
 
 		setTitle("FORMULARIO BECA");
-		setBounds(500, 300, 800, 650);
+		setBounds(500, 300, 1000, 650);
 		getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				MetodosMenus mm = new MetodosMenus();
+				mm.confirmarSalida();
+			}
+		});
 
 		JTextPane nombreC = new JTextPane();
 		nombreC.setText("Nombre");
@@ -135,7 +144,6 @@ public class FormularioBeca extends JFrame {
 				// el boton se abra la siguiente ventana
 				dispose();
 				GestionBecas becas = new GestionBecas();
-				becas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				becas.setVisible(true);
 
 			}
@@ -150,7 +158,7 @@ public class FormularioBeca extends JFrame {
 		informacionC.setOpaque(false);
 
 		JTextArea informacion = new JTextArea();
-		informacion.setBounds(new Rectangle(100, 240, 600, 30));
+		informacion.setBounds(new Rectangle(100, 240, 800, 30));
 		informacion.setEditable(false);
 		informacion.setVisible(true);
 		informacion.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.blue));
@@ -164,7 +172,7 @@ public class FormularioBeca extends JFrame {
 		informacionBecaC.setOpaque(false);
 
 		JTextArea informacionBeca = new JTextArea();
-		informacionBeca.setBounds(new Rectangle(100, 330, 600, 180));
+		informacionBeca.setBounds(new Rectangle(100, 330, 800, 180));
 		informacionBeca.setEditable(false);
 		informacionBeca.setVisible(true);
 		informacionBeca.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.blue));

@@ -19,12 +19,12 @@ public class Administrador extends Usuario {
 		this.clave = clave;
 		this.estado = estado;
 		this.descripcion_puesto = descripcion_puesto;
+		
 	}
 
 	public String getClave() {
 		return clave;
 	}
-
 	
 
 	public String getEstado() {
